@@ -37,18 +37,8 @@ public final class ApplicationTest {
     }
 
     @After public void
-    kill_the_application() throws IOException, InterruptedException {
-        if (!stillRunning()) {
-            return;
-        }
-
-        Thread.sleep(1000);
-        if (!stillRunning()) {
-            return;
-        }
-
-        applicationThread.interrupt();
-        throw new IllegalStateException("The application is still running.");
+    quit_the_application() throws IOException {
+        execute("quit");
     }
 
     @Test(timeout = 1000) public void
@@ -95,8 +85,6 @@ public final class ApplicationTest {
                 "    [ ] 8: Interaction-Driven Design",
                 ""
         );
-
-        execute("quit");
     }
 
     private void execute(String command) throws IOException {
@@ -121,7 +109,4 @@ public final class ApplicationTest {
         inWriter.println(input);
     }
 
-    private boolean stillRunning() {
-        return applicationThread != null && applicationThread.isAlive();
-    }
 }
