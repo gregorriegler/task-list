@@ -47,7 +47,7 @@ public final class TaskList implements Runnable {
     }
 
     private void execute(String commandLine) {
-        String[] commandRest = commandLine.split(" ", 3);
+        String[] commandRest = commandLine.split(" ", 2);
         String command = commandRest[0];
         switch (command) {
             case "show":
@@ -66,7 +66,7 @@ public final class TaskList implements Runnable {
                 help();
                 break;
             case "deadline":
-            	deadline(commandRest[1], commandRest[2]);
+            	deadline(commandRest[1]);
             	break;
             default:
                 error(command);
@@ -74,8 +74,10 @@ public final class TaskList implements Runnable {
         }
     }
 
-    private void deadline(String taskId, String date) {
-		
+    private void deadline(String commandLine) {
+        String[] subcommandRest = commandLine.split(" ", 2);
+        String subcommand = subcommandRest[];
+        String taskId = subcommandRest[0];
     	
 	}
 
