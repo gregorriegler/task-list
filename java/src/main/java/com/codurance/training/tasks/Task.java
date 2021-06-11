@@ -1,6 +1,7 @@
 package com.codurance.training.tasks;
 
 public final class Task {
+	
     private final long id;
     private final String description;
     private boolean done;
