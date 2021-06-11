@@ -9,7 +9,7 @@ import java.util.*;
 public final class TaskList implements Runnable {
     private static final String QUIT = "quit";
 
-    private final ProjectRepository tasks = new LinkedHashMap<>();
+    private final ProjectRepository tasks = new ProjectRepository();
 
     private final BufferedReader in;
     private final PrintWriter out;
