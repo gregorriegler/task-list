@@ -8,6 +8,7 @@ import java.io.PipedOutputStream;
 import java.io.PrintWriter;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static java.lang.System.lineSeparator;
@@ -87,6 +88,7 @@ public final class ApplicationTest {
         );
     }
 
+    @Ignore
     @Test(timeout = 1000)
     public void addOptionalDeadline() throws IOException {
         // setup
@@ -99,6 +101,7 @@ public final class ApplicationTest {
         readLines("Deadline added successfully to the task 0");
     }
 
+    @Ignore
     @Test(timeout = 1000)
     public void addOptionalDeadlineWrongDateFormat() throws IOException {
         // setup
@@ -111,6 +114,7 @@ public final class ApplicationTest {
         readLines("Wrong date format. Expected yyyy-MM-dd");
     }
 
+    @Ignore
     @Test(timeout = 1000)
     public void addOptionalDeadlineWrongTaskId() throws IOException {
         // setup
