@@ -17,7 +17,7 @@ public class Project {
         return name;
     }
 
-    public List<Task> getTasks() {
+    public Tasks getTasks() {
         return tasks;
     }
 

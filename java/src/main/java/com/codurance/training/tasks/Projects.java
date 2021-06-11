@@ -13,4 +13,16 @@ public class Projects extends ArrayList<Project> {
     	}
         return null;
     }
+
+	Task findTaskById(TaskId taskId) {
+
+		for (Project project : this) {
+			for (Task task : project.getTasks()) {
+				if (task.getId().equals(taskId)) {
+					return task;
+				}
+			}
+		}
+		return null;
+	}
 }

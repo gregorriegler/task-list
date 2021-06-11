@@ -5,9 +5,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 public final class TaskList implements Runnable {
     private static final String QUIT = "quit";
@@ -81,25 +78,13 @@ public final class TaskList implements Runnable {
     	String date = subcommandRest[1];
     	LocalDate deadline = LocalDate.parse(date);
     	Deadline newDeadline = new Deadline(deadline);
-        Task task = findTaskById(new TaskId(taskId));
+        Task task = projects.findTaskById(new TaskId(taskId));
         if(task!=null) {
             task.setDeadline(newDeadline);
         }
     }
-    
-    private Task findTaskById(TaskId taskId) {
-    	
-    	for (Project project : projects) {
-            for (Task task : project.getTasks()) {
-                if (task.getId().equals(taskId)) {
-                	return task;
-                }
-            }
-        }
-    	return null;
-    }
 
-	private void show() {
+    private void show() {
         for (Project project : projects) {
             out.println(project.getName());
             for (Task task : project.getTasks()) {
@@ -132,7 +117,7 @@ public final class TaskList implements Runnable {
             out.println();
             return;
         }
-        List<Task> projectTasks = project.getTasks();
+        Tasks projectTasks = project.getTasks();
         projectTasks.add(new Task(nextId(), description, false));
     }
 
