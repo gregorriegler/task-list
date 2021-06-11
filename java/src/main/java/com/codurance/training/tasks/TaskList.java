@@ -91,7 +91,7 @@ public final class TaskList implements Runnable {
     	
     	for (Project project : projects) {
             for (Task task : project.getTasks()) {
-                if (task.getId() == taskId) {
+                if (task.getId().equals(taskId)) {
                 	return task;
                 }
             }
@@ -103,7 +103,7 @@ public final class TaskList implements Runnable {
         for (Project project : projects) {
             out.println(project.getName());
             for (Task task : project.getTasks()) {
-                out.printf("    [%c] %d: %s%n", (task.isDone() ? 'x' : ' '), task.getId(), task.getDescription());
+                out.printf("    [%c] %d: %s%n", (task.isDone() ? 'x' : ' '), task.getId().getId(), task.getDescription());
             }
             out.println();
         }
@@ -148,7 +148,7 @@ public final class TaskList implements Runnable {
         TaskId id = new TaskId(idString);
         for (Project project : projects) {
             for (Task task : project.getTasks()) {
-                if (task.getId() == id) {
+                if (task.getId().equals(id)) {
                     task.setDone(done);
                     return;
                 }
