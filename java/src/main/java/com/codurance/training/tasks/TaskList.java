@@ -87,7 +87,7 @@ public final class TaskList implements Runnable {
         }
     }
     
-    private Task findTaskById(long taskId) {
+    private Task findTaskById(TaskId taskId) {
     	
     	for (Project project : projects) {
             for (Task task : project.getTasks()) {
@@ -145,7 +145,7 @@ public final class TaskList implements Runnable {
     }
 
     private void setDone(String idString, boolean done) {
-        int id = Integer.parseInt(idString);
+        TaskId id = new TaskId(Long.parseLong(idString));
         for (Project project : projects) {
             for (Task task : project.getTasks()) {
                 if (task.getId() == id) {
@@ -173,7 +173,7 @@ public final class TaskList implements Runnable {
         out.println();
     }
 
-    private long nextId() {
-        return ++lastId;
+    private TaskId nextId() {
+        return new TaskId(++lastId);
     }
 }
