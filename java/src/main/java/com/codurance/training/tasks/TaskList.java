@@ -160,7 +160,7 @@ public final class TaskList implements Runnable {
         out.println();
     }
 
-    private long nextId() {
+    private Ta nextId() {
         return ++lastId;
     }
 }
