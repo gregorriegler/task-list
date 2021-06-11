@@ -9,6 +9,7 @@ public class TaskIdGenerator {
     }
 
     public TaskId nextId() {
-        return lastId.next();
+        this.lastId = lastId.next();
+        return lastId;
     }
 }

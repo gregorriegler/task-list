@@ -13,17 +13,18 @@ public final class TaskList implements Runnable {
 
     private final BufferedReader in;
     private final PrintWriter out;
-    private final TaskIdGenerator taskIdGenerator = new TaskIdGenerator();
+    private final TaskIdGenerator taskIdGenerator;
 
     public static void main(String[] args) throws Exception {
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         PrintWriter out = new PrintWriter(System.out);
-        new TaskList(in, out).run();
+        new TaskList(in, out, new TaskIdGenerator()).run();
     }
 
-    public TaskList(BufferedReader reader, PrintWriter writer) {
+    public TaskList(BufferedReader reader, PrintWriter writer, TaskIdGenerator taskIdGenerator) {
         this.in = reader;
         this.out = writer;
+        this.taskIdGenerator = taskIdGenerator;
     }
 
     public void run() {
@@ -73,17 +74,19 @@ public final class TaskList implements Runnable {
 
 
     private void deadline(DeadLineArguments arguments) {
-        Long parsedId = arguments.getTaskId().getId();
+        TaskId taskId = arguments.getTaskId();
         for (Map.Entry<String, List<Task>> project : tasks.entrySet()) {
             for (Task task : project.getValue()) {
-                if (Objects.equals(parsedId, task.getId())) {
-                    out.printf("Deadline added successfully to the task %s", parsedId);
+                if (Objects.equals(taskId, task.getId())) {
+                    // TODO taskId#toString?
+                    out.printf("Deadline added successfully to the task %s", taskId);
                     out.println();
                     return;
                 }
             }
         }
-        out.printf("Task with the given id %s is not found.", parsedId);
+        // TODO taskId#toString?
+        out.printf("Task with the given id %s is not found.", taskId);
         out.println();
     }
 
@@ -91,7 +94,7 @@ public final class TaskList implements Runnable {
         for (Map.Entry<String, List<Task>> project : tasks.entrySet()) {
             out.println(project.getKey());
             for (Task task : project.getValue()) {
-                out.printf("    [%c] %d: %s%n", (task.isDone() ? 'x' : ' '), task.getId(), task.getDescription());
+                out.printf(task.getShowMsg());
             }
             out.println();
         }
@@ -139,7 +142,7 @@ public final class TaskList implements Runnable {
                 }
             }
         }
-        out.printf("Could not find a task with an ID of %d.", id);
+        out.printf("Could not find a task with an ID of %s.", id.toString());
         out.println();
     }
 

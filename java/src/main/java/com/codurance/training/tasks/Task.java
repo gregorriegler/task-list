@@ -26,4 +26,8 @@ public final class Task {
     public void setDone(boolean done) {
         this.done = done;
     }
+
+    String getShowMsg() {
+        return String.format("    [%c] %s: %s%n", (isDone() ? 'x' : ' '), id, getDescription());
+    }
 }

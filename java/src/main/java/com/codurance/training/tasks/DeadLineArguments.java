@@ -1,7 +1,5 @@
 package com.codurance.training.tasks;
 
-import jdk.vm.ci.meta.Local;
-
 import java.time.LocalDate;
 
 public class DeadLineArguments {

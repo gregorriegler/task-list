@@ -12,11 +12,12 @@ public class TaskId {
         this.id = Long.parseLong(id);
     }
 
-    public Long getId() {
-        return id;
-    }
-
     public TaskId next() {
         return new TaskId(id + 1);
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(id);
     }
 }
