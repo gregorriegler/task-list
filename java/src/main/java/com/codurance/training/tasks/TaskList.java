@@ -91,13 +91,7 @@ public final class TaskList implements Runnable {
     }
 
     private void show() {
-        for (Map.Entry<String, List<Task>> project : tasks.entrySet()) {
-            out.println(project.getKey());
-            for (Task task : project.getValue()) {
-                out.printf(task.getShowMsg());
-            }
-            out.println();
-        }
+        out.print(this.tasks);
     }
 
     private void add(String commandLine) {
