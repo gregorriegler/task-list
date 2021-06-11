@@ -85,13 +85,11 @@ public final class ApplicationTest {
                 "    [ ] 8: Interaction-Driven Design",
                 ""
         );
-        execute("today");
-        execute("deadline 1 12.06.2021");
-        execute("show deadlines 12.06.2021");
     }
-    
-    public void dealines() {
-    	
+
+    @Test
+    public void deadlines() {
+        execute("deadline 1 12.06.2021");
     }
 
     private void execute(String command) throws IOException {
