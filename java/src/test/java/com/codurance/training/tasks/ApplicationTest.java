@@ -89,7 +89,7 @@ public final class ApplicationTest {
 
     @Test
     public void deadlines() throws IOException {
-        execute("deadline 1 12.06.2021");
+        execute("deadline 1 12/06/2021");
     }
 
     private void execute(String command) throws IOException {

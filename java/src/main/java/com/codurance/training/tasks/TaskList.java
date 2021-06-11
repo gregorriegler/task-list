@@ -82,8 +82,9 @@ public final class TaskList implements Runnable {
     	String date = subcommandRest[1];
     	LocalDate deadline = LocalDate.parse(date);
     	Deadline newDeadline = new Deadline(deadline);
-    	findTaskById(Long.parseLong(taskId));
-	}
+        Task task = findTaskById(Long.parseLong(taskId));
+        task.setDeadline(newDeadline);
+    }
     
     private Task findTaskById(long taskId) {
     	
