@@ -98,25 +98,16 @@ public final class TaskList implements Runnable {
         String[] subcommandRest = commandLine.split(" ", 2);
         String subcommand = subcommandRest[0];
         if (subcommand.equals("project")) {
-            addProject(subcommandRest[1]);
+            projectRepository.addProject(subcommandRest[1]);
         } else if (subcommand.equals("task")) {
             String[] projectTask = subcommandRest[1].split(" ", 2);
-            addTask(projectTask[0], projectTask[1]);
+            if (projectRepository.missing(projectTask[0])) {
+                out.printf("Could not find a project with the name \"%s\".", projectTask[0]);
+                out.println();
+                return;
+            }
+            projectRepository.addTask(projectTask[0], new Task(this.taskIdGenerator.nextId(), projectTask[1], false));
         }
-    }
-
-    private void addProject(String name) {
-        projectRepository.put(name, new ArrayList<Task>());
-    }
-
-    private void addTask(String project, String description) {
-        List<Task> projectTasks = projectRepository.get(project);
-        if (projectTasks == null) {
-            out.printf("Could not find a project with the name \"%s\".", project);
-            out.println();
-            return;
-        }
-        projectTasks.add(new Task(this.taskIdGenerator.nextId(), description, false));
     }
 
     private void check(TaskId id) {
