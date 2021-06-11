@@ -9,6 +9,10 @@ public class TaskId {
 		this.id = id;
 	}
 
+	public TaskId(String id) {
+		this(Long.parseLong(id));
+	}
+
 
 	
 }
