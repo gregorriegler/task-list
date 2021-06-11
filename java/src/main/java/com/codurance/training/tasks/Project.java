@@ -3,14 +3,21 @@ package com.codurance.training.tasks;
 import java.util.List;
 
 public class Project {
-    private String name;
-    private  List tasks;
+	
+    private final String name;
+    private final Tasks tasks;
 
-    public String getName() {
+    public Project(String name) {
+		super();
+		this.name = name;
+		tasks = new Tasks();
+	}
+
+	public String getName() {
         return name;
     }
 
-    public List getTasks() {
+    public List<Task> getTasks() {
         return tasks;
     }
 
