@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -75,11 +76,26 @@ public final class TaskList implements Runnable {
     }
 
     private void deadline(String commandLine) {
-        String[] subcommandRest = commandLine.split(" ", 2);
-        String subcommand = subcommandRest[];
-        String taskId = subcommandRest[0];
     	
+        String[] subcommandRest = commandLine.split(" ", 2);
+        String taskId = subcommandRest[0];
+    	String date = subcommandRest[1];
+    	LocalDate deadline = LocalDate.parse(date);
+    	Deadline newDeadline = new Deadline(deadline);
+    	findTaskById(Long.parseLong(taskId));
 	}
+    
+    private Task findTaskById(long taskId) {
+    	
+    	for (Map.Entry<String, List<Task>> project : tasks.entrySet()) {
+            for (Task task : project.getValue()) {
+                if (task.getId() == taskId) {
+                	return task;
+                }
+            }
+        }
+    	return null;
+    }
 
 	private void show() {
         for (Map.Entry<String, List<Task>> project : tasks.entrySet()) {
