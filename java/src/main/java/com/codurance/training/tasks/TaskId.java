@@ -28,6 +28,8 @@ public class TaskId {
 		this(Long.parseLong(id));
 	}
 
-
-	
+	@Override
+	public String toString() {
+		return "" + id;
+	}
 }

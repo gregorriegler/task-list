@@ -103,7 +103,7 @@ public final class TaskList implements Runnable {
         for (Project project : projects) {
             out.println(project.getName());
             for (Task task : project.getTasks()) {
-                out.printf("    [%c] %d: %s%n", (task.isDone() ? 'x' : ' '), task.getId().getId(), task.getDescription());
+                out.printf("    [%c] %s: %s%n", (task.isDone() ? 'x' : ' '), task.getId(), task.getDescription());
             }
             out.println();
         }
