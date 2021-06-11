@@ -78,10 +78,11 @@ public final class TaskList implements Runnable {
             for (Task task : project.getValue()) {
                 if (Objects.equals(parsedId, task.getId())) {
                     out.printf("Deadline added successfully to the task %s", parsedId);
+                    return;
                 }
             }
-
         }
+        out.printf("Task with the given id %s is not found.", parsedId);
 
     }
 
