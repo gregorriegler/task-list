@@ -47,7 +47,7 @@ public final class TaskList implements Runnable {
     }
 
     private void execute(String commandLine) {
-        String[] commandRest = commandLine.split(" ", 2);
+        String[] commandRest = commandLine.split(" ", 3);
         String command = commandRest[0];
         switch (command) {
             case "show":
@@ -65,13 +65,21 @@ public final class TaskList implements Runnable {
             case "help":
                 help();
                 break;
+            case "deadline":
+            	deadline(commandRest[1], commandRest[2]);
+            	break;
             default:
                 error(command);
                 break;
         }
     }
 
-    private void show() {
+    private void deadline(String taskId, String date) {
+		
+    	
+	}
+
+	private void show() {
         for (Map.Entry<String, List<Task>> project : tasks.entrySet()) {
             out.println(project.getKey());
             for (Task task : project.getValue()) {

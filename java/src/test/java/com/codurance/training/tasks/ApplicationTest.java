@@ -88,7 +88,7 @@ public final class ApplicationTest {
     }
 
     @Test
-    public void deadlines() {
+    public void deadlines() throws IOException {
         execute("deadline 1 12.06.2021");
     }
 
