@@ -2,18 +2,18 @@ package com.codurance.training.tasks;
 
 public final class Task {
 	
-    private final long id;
+    private final TaskId id;
     private final String description;
     private boolean done;
     private Deadline deadline;
 
-    public Task(long id, String description, boolean done) {
+    public Task(TaskId id, String description, boolean done) {
         this.id = id;
         this.description = description;
         this.done = done;
     }
 
-    public long getId() {
+    public TaskId getId() {
         return id;
     }
 

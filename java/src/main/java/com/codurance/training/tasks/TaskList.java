@@ -124,13 +124,15 @@ public final class TaskList implements Runnable {
         projects.add(new Project(name));
     }
 
-    private void addTask(String project, String description) {
-        List<Task> projectTasks = projects.get(project);
-        if (projectTasks == null) {
-            out.printf("Could not find a project with the name \"%s\".", project);
+    private void addTask(String projectName, String description) {
+    	
+    	Project project = projects.get(projectName);
+        if (project == null) {
+            out.printf("Could not find a project with the name \"%s\".", projectName);
             out.println();
             return;
         }
+        List<Task> projectTasks = project.getTasks();
         projectTasks.add(new Task(nextId(), description, false));
     }
 

@@ -5,7 +5,12 @@ import java.util.List;
 
 public class Projects extends ArrayList<Project> {
 
-    public List<Task> get(String name) {
+    public Project get(String name) {
+    	for (Project project : this) {
+    		if (project.getName().equals(name)) {
+    			return project;
+    		}
+    	}
         return null;
     }
 }
