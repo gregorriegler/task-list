@@ -65,10 +65,16 @@ public final class TaskList implements Runnable {
             case "help":
                 help();
                 break;
+            case "deadline":
+                deadline();
+                break;
             default:
                 error(command);
                 break;
         }
+    }
+
+    private void deadline() {
     }
 
     private void show() {

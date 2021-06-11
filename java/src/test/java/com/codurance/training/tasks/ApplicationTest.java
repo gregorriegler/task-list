@@ -88,7 +88,7 @@ public final class ApplicationTest {
     }
 
     @Test(timeout = 1000)
-    public void executeOptionalDeadline() throws IOException {
+    public void addOptionalDeadline() throws IOException {
         // setup
         execute("add project secrets");
         execute("add task secrets Eat more donuts.");
@@ -96,7 +96,31 @@ public final class ApplicationTest {
 
         // action
         execute("deadline 0 2021-06-11");
+        readLines("Deadline added successfully to the task 0");
+    }
 
+    @Test(timeout = 1000)
+    public void addOptionalDeadlineWrongDateFormat() throws IOException {
+        // setup
+        execute("add project secrets");
+        execute("add task secrets Eat more donuts.");
+        execute("show");
+
+        // action
+        execute("deadline 0 2021");
+        readLines("Wrong date format. Expected yyyy-MM-dd");
+    }
+
+    @Test(timeout = 1000)
+    public void addOptionalDeadlineWrongTaskId() throws IOException {
+        // setup
+        execute("add project secrets");
+        execute("add task secrets Eat more donuts.");
+        execute("show");
+
+        // action
+        execute("deadline 1234 2021-06-11");
+        readLines("Task with the given id 1234 is not found.");
     }
 
     private void execute(String command) throws IOException {
