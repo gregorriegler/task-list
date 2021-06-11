@@ -64,7 +64,7 @@ public final class TaskList implements Runnable {
                 help();
                 break;
             case "deadline":
-                deadline(commandRest[1], commandRest[2]);
+                deadline(new DeadLineArguments(commandRest));
                 break;
             default:
                 error(command);
@@ -72,8 +72,9 @@ public final class TaskList implements Runnable {
         }
     }
 
-    private void deadline(String id, String date) {
-        Long parsedId = Long.parseLong(id);
+
+    private void deadline(DeadLineArguments arguments) {
+        Long parsedId = arguments.getTaskId().getId();
         for (Map.Entry<String, List<Task>> project : tasks.entrySet()) {
             for (Task task : project.getValue()) {
                 if (Objects.equals(parsedId, task.getId())) {
