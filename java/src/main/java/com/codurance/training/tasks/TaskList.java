@@ -121,7 +121,7 @@ public final class TaskList implements Runnable {
     }
 
     private void addProject(String name) {
-        projects.put(name, new ArrayList<Task>());
+        projects.add(new Project(name));
     }
 
     private void addTask(String project, String description) {
@@ -144,8 +144,8 @@ public final class TaskList implements Runnable {
 
     private void setDone(String idString, boolean done) {
         int id = Integer.parseInt(idString);
-        for (Map.Entry<String, List<Task>> project : projects.entrySet()) {
-            for (Task task : project.getValue()) {
+        for (Project project : projects) {
+            for (Task task : project.getTasks()) {
                 if (task.getId() == id) {
                     task.setDone(done);
                     return;
