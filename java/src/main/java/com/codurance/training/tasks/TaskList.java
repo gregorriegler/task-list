@@ -4,15 +4,13 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public final class TaskList implements Runnable {
     private static final String QUIT = "quit";
 
     private final Map<String, List<Task>> tasks = new LinkedHashMap<>();
+
     private final BufferedReader in;
     private final PrintWriter out;
 
@@ -66,7 +64,7 @@ public final class TaskList implements Runnable {
                 help();
                 break;
             case "deadline":
-                deadline();
+                deadline(commandRest[1], commandRest[2]);
                 break;
             default:
                 error(command);
@@ -74,7 +72,17 @@ public final class TaskList implements Runnable {
         }
     }
 
-    private void deadline() {
+    private void deadline(String id, String date) {
+        Long parsedId = Long.parseLong(id);
+        for (Map.Entry<String, List<Task>> project : tasks.entrySet()) {
+            for (Task task : project.getValue()) {
+                if (Objects.equals(parsedId, task.getId())) {
+                    out.printf("Deadline added successfully to the task %s", parsedId);
+                }
+            }
+
+        }
+
     }
 
     private void show() {
