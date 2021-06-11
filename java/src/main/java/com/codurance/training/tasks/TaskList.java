@@ -119,14 +119,7 @@ public final class TaskList implements Runnable {
     }
 
     private void setDone(TaskId id, boolean done) {
-        for (Map.Entry<String, List<Task>> project : projectRepository.entrySet()) {
-            for (Task task : project.getValue()) {
-                if (Objects.equals(task.getId(), id)) {
-                    task.setDone(done);
-                    return;
-                }
-            }
-        }
+        projectRepository.foo(id, done, this);
         out.printf("Could not find a task with an ID of %s.", id.toString());
         out.println();
     }

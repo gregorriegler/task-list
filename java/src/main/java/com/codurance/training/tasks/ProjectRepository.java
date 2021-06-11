@@ -1,9 +1,6 @@
 package com.codurance.training.tasks;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ProjectRepository extends LinkedHashMap<String, List<Task>> {
 
@@ -32,5 +29,17 @@ public class ProjectRepository extends LinkedHashMap<String, List<Task>> {
 
     boolean missing(String key) {
         return get(key) == null;
+    }
+
+    void foo(TaskId id, boolean done, TaskList taskList) {
+        for (Map.Entry<String, List<Task>> project : entrySet()) {
+            for (Task task : project.getValue()) {
+                if (Objects.equals(task.getId(), id)) {
+                    task.setDone(done);
+                    return ;
+                }
+            }
+        }
+       
     }
 }
