@@ -87,6 +87,18 @@ public final class ApplicationTest {
         );
     }
 
+    @Test(timeout = 1000)
+    public void executeOptionalDeadline() throws IOException {
+        // setup
+        execute("add project secrets");
+        execute("add task secrets Eat more donuts.");
+        execute("show");
+
+        // action
+        execute("deadline 0 2021-06-11");
+
+    }
+
     private void execute(String command) throws IOException {
         read(PROMPT);
         write(command);
