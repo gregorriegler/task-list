@@ -13,8 +13,7 @@ public final class TaskList implements Runnable {
 
     private final BufferedReader in;
     private final PrintWriter out;
-
-    private long lastId = 0;
+    private final TaskIdGenerator taskIdGenerator = new TaskIdGenerator();
 
     public static void main(String[] args) throws Exception {
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
@@ -55,10 +54,10 @@ public final class TaskList implements Runnable {
                 add(commandRest[1]);
                 break;
             case "check":
-                check(commandRest[1]);
+                check(new TaskId(commandRest[1]));
                 break;
             case "uncheck":
-                uncheck(commandRest[1]);
+                uncheck(new TaskId(commandRest[1]));
                 break;
             case "help":
                 help();
@@ -120,22 +119,21 @@ public final class TaskList implements Runnable {
             out.println();
             return;
         }
-        projectTasks.add(new Task(nextId(), description, false));
+        projectTasks.add(new Task(this.taskIdGenerator.nextId(), description, false));
     }
 
-    private void check(String idString) {
-        setDone(idString, true);
+    private void check(TaskId id) {
+        setDone(id, true);
     }
 
-    private void uncheck(String idString) {
-        setDone(idString, false);
+    private void uncheck(TaskId id) {
+        setDone(id, false);
     }
 
-    private void setDone(String idString, boolean done) {
-        int id = Integer.parseInt(idString);
+    private void setDone(TaskId id, boolean done) {
         for (Map.Entry<String, List<Task>> project : tasks.entrySet()) {
             for (Task task : project.getValue()) {
-                if (task.getId() == id) {
+                if (Objects.equals(task.getId(), id)) {
                     task.setDone(done);
                     return;
                 }
@@ -160,7 +158,4 @@ public final class TaskList implements Runnable {
         out.println();
     }
 
-    private TaskId nextId() {
-        return ++lastId;
-    }
 }

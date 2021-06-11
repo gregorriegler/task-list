@@ -15,4 +15,8 @@ public class TaskId {
     public Long getId() {
         return id;
     }
+
+    public TaskId next() {
+        return new TaskId(id + 1);
+    }
 }

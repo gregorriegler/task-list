@@ -8,7 +8,7 @@ public class TaskIdGenerator {
         lastId = new TaskId(0L);
     }
 
-    public nextId() {
-
+    public TaskId nextId() {
+        return lastId.next();
     }
 }
